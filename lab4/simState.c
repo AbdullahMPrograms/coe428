@@ -9,11 +9,11 @@ typedef struct state
     char id;
     char transition_zero;
     char transition_one;
-} state_t;
+} state;
 
-state_t **state_machine;
-state_t *current_state;
-state_t **unreachable_states;
+state **state_machine;
+state *current_state;
+state **unreachable_states;
 int num_unreachable_states;
 
 void change_transition(char input, char transition)
@@ -47,13 +47,13 @@ void update_current_state(char input)
 
 void initialize_state_machine()
 {
-    state_machine = (state_t **)calloc(sizeof(state_t *), MAX_STATES);
-    unreachable_states = (state_t **)calloc(sizeof(state_t *), MAX_STATES);
+    state_machine = (state **)calloc(sizeof(state *), MAX_STATES);
+    unreachable_states = (state **)calloc(sizeof(state *), MAX_STATES);
     char zeros[MAX_STATES] = {'F', 'H', 'G', 'C', 'B', 'D', 'E', 'A'};
     char ones[MAX_STATES] = {'B', 'C', 'H', 'F', 'A', 'G', 'G', 'D'};
     for (int i = 0; i < MAX_STATES; i++)
     {
-        state_machine[i] = (state_t *)malloc(sizeof(state_t));
+        state_machine[i] = (state *)malloc(sizeof(state));
         state_machine[i]->id = 'A' + i;
         state_machine[i]->transition_zero = zeros[i];
         state_machine[i]->transition_one = ones[i];
